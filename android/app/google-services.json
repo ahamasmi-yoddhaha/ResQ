@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "290567846891",
+    "project_id": "e-cum-sd-app",
+    "storage_bucket": "e-cum-sd-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "appId",
+        "android_client_info": {
+          "package_name": "com.aacappdevglwec.e_cum_sd_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "apikey"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
