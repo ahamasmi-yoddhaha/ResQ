@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:e_cum_sd_app/settings.dart';
+import 'package:e_cum_sd_app/homepage.dart';
+import 'package:e_cum_sd_app/mylocation.dart';
 
 class Help extends StatefulWidget {
   const Help({super.key});
@@ -22,17 +25,17 @@ class _MyWidgetState extends State<Help> {
             },
           ),
         ),
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 SizedBox(
                   height: 20,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 08,
                 ),
-                const Text(
+                Text(
                   "HELP",
                   style: TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
                 ),

@@ -1,8 +1,5 @@
 import 'package:e_cum_sd_app/dashboard.dart';
-import 'package:e_cum_sd_app/mylocation.dart';
 import 'package:flutter/material.dart';
-//import 'package:e_cum_sd_app/dashboard.dart';
-import 'package:e_cum_sd_app/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,63 +8,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[300],
-        bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black,
-            backgroundColor: Colors.white,
-            iconSize: 25.0,
-            selectedFontSize: 20,
-            unselectedFontSize: 15,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            currentIndex: currentIndex,
-            onTap: (index) => setState(() => currentIndex = index),
-            items: [
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(Icons.home),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
-                ),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(Icons.call),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MyLocation()),
-                    );
-                  },
-                ),
-                label: 'Helpline',
-              ),
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Settings()),
-                    );
-                  },
-                ),
-                label: 'Settings',
-              ),
-            ]),
         //drawer: MyDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
@@ -115,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
