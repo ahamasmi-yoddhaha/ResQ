@@ -91,57 +91,57 @@ class _MyWidgetState extends State<MyLocation> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[300],
-        bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black,
-            backgroundColor: Colors.white,
-            iconSize: 25.0,
-            selectedFontSize: 20,
-            unselectedFontSize: 15,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            currentIndex: currentIndex,
-            onTap: (index) => setState(() => currentIndex = index),
-            items: [
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(Icons.home),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
-                ),
-                label: 'HOME',
-              ),
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(Icons.call),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MyLocation()),
-                    );
-                  },
-                ),
-                label: 'HELP NO',
-              ),
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Settings()),
-                    );
-                  },
-                ),
-                label: 'SETTINGS',
-              ),
-            ]),
+        // bottomNavigationBar: BottomNavigationBar(
+        //     type: BottomNavigationBarType.shifting,
+        //     selectedItemColor: Colors.black,
+        //     unselectedItemColor: Colors.black,
+        //     backgroundColor: Colors.white,
+        //     iconSize: 25.0,
+        //     selectedFontSize: 20,
+        //     unselectedFontSize: 15,
+        //     showSelectedLabels: true,
+        //     showUnselectedLabels: true,
+        //     currentIndex: currentIndex,
+        //     onTap: (index) => setState(() => currentIndex = index),
+        //     items: [
+        //       BottomNavigationBarItem(
+        //         icon: IconButton(
+        //           icon: const Icon(Icons.home),
+        //           onPressed: () {
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(builder: (context) => const HomePage()),
+        //             );
+        //           },
+        //         ),
+        //         label: 'HOME',
+        //       ),
+        //       BottomNavigationBarItem(
+        //         icon: IconButton(
+        //           icon: const Icon(Icons.call),
+        //           onPressed: () {
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (context) => const MyLocation()),
+        //             );
+        //           },
+        //         ),
+        //         label: 'HELP NO',
+        //       ),
+        //       BottomNavigationBarItem(
+        //         icon: IconButton(
+        //           icon: const Icon(Icons.settings),
+        //           onPressed: () {
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(builder: (context) => const Settings()),
+        //             );
+        //           },
+        //         ),
+        //         label: 'SETTINGS',
+        //       ),
+        //     ]),
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
           leading: IconButton(

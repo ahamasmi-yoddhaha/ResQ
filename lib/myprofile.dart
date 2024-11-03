@@ -43,34 +43,34 @@ class _MyProfileState extends State<MyProfile> {
       body: _screens[currentIndex],
 
       // Bottom navigation bar
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        backgroundColor: Colors.white,
-        iconSize: 25.0,
-        selectedFontSize: 20,
-        unselectedFontSize: 15,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        currentIndex: currentIndex, // Track the current selected tab
-        onTap: (index) =>
-            setState(() => currentIndex = index), // Update index on tab click
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'HOME',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.call),
-            label: 'HELP NO',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'SETTINGS',
-          ),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   type: BottomNavigationBarType.shifting,
+      //   selectedItemColor: Colors.black,
+      //   unselectedItemColor: Colors.black,
+      //   backgroundColor: Colors.white,
+      //   iconSize: 25.0,
+      //   selectedFontSize: 20,
+      //   unselectedFontSize: 15,
+      //   showSelectedLabels: true,
+      //   showUnselectedLabels: true,
+      //   currentIndex: currentIndex, // Track the current selected tab
+      //   onTap: (index) =>
+      //       setState(() => currentIndex = index), // Update index on tab click
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'HOME',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.call),
+      //       label: 'HELP NO',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.settings),
+      //       label: 'SETTINGS',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:e_cum_sd_app/homepage.dart';
+import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,44 +18,69 @@ class _OtpScreenState extends State<OtpScreen> {
   final otpController = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("OTP SCREEN"),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              controller: otpController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                  hintText: "Enter The OTP",
-                  suffixIcon: Icon(Icons.phone),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(9))),
-            ),
-          ),
-          SizedBox(height: 30),
-          ElevatedButton(
-              onPressed: () async {
-                try {
-                  final cred = PhoneAuthProvider.credential(
-                      verificationId: widget.verificationId,
-                      smsCode: otpController.text);
-                  await FirebaseAuth.instance.signInWithCredential(cred);
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ));
-                } catch (e) {
-                  log(e.toString());
-                }
-              },
-              child: Text("OTP"))
-        ],
+              //OTP
+              const Text(
+                "OTP",
+                style: TextStyle(fontSize: 40, fontFamily: "PlayfairDisplay"),
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: otpController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(9))),
+                ),
+              ),
+              SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    final cred = PhoneAuthProvider.credential(
+                        verificationId: widget.verificationId,
+                        smsCode: otpController.text);
+                    await FirebaseAuth.instance.signInWithCredential(cred);
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainsPage(),
+                        ));
+                  } catch (e) {
+                    log(e.toString());
+                  }
+                },
+                child: Text(
+                  "SIGN IN",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "PlayfairDisplay",
+                      fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: Size(150, 50),
+                    backgroundColor: Colors.grey[400],
+                    shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(9))),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -24,13 +24,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("  "),
-                    Icon(Icons.arrow_left_sharp, size: 50),
-                  ],
-                ),
+
                 const SizedBox(
                   height: 50,
                 ),
@@ -38,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
                 //LOGIN
                 const Text(
                   "LOGIN",
-                  style: TextStyle(fontSize: 40),
+                  style: TextStyle(fontSize: 40, fontFamily: "PlayfairDisplay"),
                 ),
 
                 const SizedBox(
@@ -50,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
                       controller: phoneController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                          hintText: "Enter Phone Number",
                           suffixIcon: Icon(Icons.phone),
                           fillColor: Colors.white,
                           filled: true,
@@ -81,9 +74,12 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     "VERIFY",
                     style: TextStyle(
-                        color: Colors.black, fontFamily: "PlayfairDisplay"),
+                        color: Colors.black,
+                        fontFamily: "PlayfairDisplay",
+                        fontSize: 20),
                   ),
                   style: ElevatedButton.styleFrom(
+                      fixedSize: Size(150, 50),
                       backgroundColor: Colors.grey[400],
                       shape: ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(9))),
