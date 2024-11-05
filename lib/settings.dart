@@ -1,3 +1,4 @@
+import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:e_cum_sd_app/help.dart';
 import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/permission.dart';
@@ -21,63 +22,15 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
         leading: IconButton(
-          icon: const Icon(Icons.arrow_left_sharp, size: 50),
+          icon: const Icon(Icons.dehaze_rounded),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Dashboard()),
+            );
           },
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //     type: BottomNavigationBarType.shifting,
-      //     selectedItemColor: Colors.black,
-      //     unselectedItemColor: Colors.black,
-      //     backgroundColor: Colors.white,
-      //     iconSize: 25.0,
-      //     selectedFontSize: 20,
-      //     unselectedFontSize: 15,
-      //     showSelectedLabels: true,
-      //     showUnselectedLabels: true,
-      //     currentIndex: currentIndex,
-      //     onTap: (index) => setState(() => currentIndex = index),
-      //     items: [
-      //       BottomNavigationBarItem(
-      //         icon: IconButton(
-      //           icon: const Icon(Icons.home),
-      //           onPressed: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(builder: (context) => const HomePage()),
-      //             );
-      //           },
-      //         ),
-      //         label: 'HOME',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: IconButton(
-      //           icon: const Icon(Icons.call),
-      //           onPressed: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: (context) => const SavedLocation()),
-      //             );
-      //           },
-      //         ),
-      //         label: 'HELP NO',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: IconButton(
-      //           icon: const Icon(Icons.settings),
-      //           onPressed: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(builder: (context) => const Settings()),
-      //             );
-      //           },
-      //         ),
-      //         label: 'SETTINGS',
-      //       ),
-      //     ]),
       backgroundColor: Colors.grey[300],
       body: Center(
         child: Column(children: [

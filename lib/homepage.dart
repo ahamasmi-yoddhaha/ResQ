@@ -17,62 +17,10 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[300],
-        // bottomNavigationBar: BottomNavigationBar(
-        //     type: BottomNavigationBarType.shifting,
-        //     selectedItemColor: Colors.black,
-        //     unselectedItemColor: Colors.black,
-        //     backgroundColor: Colors.white,
-        //     iconSize: 25.0,
-        //     selectedFontSize: 20,
-        //     unselectedFontSize: 15,
-        //     showSelectedLabels: true,
-        //     showUnselectedLabels: true,
-        //     currentIndex: currentIndex,
-        //     onTap: (index) => setState(() => currentIndex = index),
-        //     items: [
-        //       BottomNavigationBarItem(
-        //         icon: IconButton(
-        //           icon: const Icon(Icons.home),
-        //           onPressed: () {
-        //             Navigator.push(
-        //               context,
-        //               MaterialPageRoute(builder: (context) => const HomePage()),
-        //             );
-        //           },
-        //         ),
-        //         label: "Home",
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: IconButton(
-        //           icon: const Icon(Icons.call),
-        //           onPressed: () {
-        //             Navigator.push(
-        //               context,
-        //               MaterialPageRoute(
-        //                   builder: (context) => const MyLocation()),
-        //             );
-        //           },
-        //         ),
-        //         label: 'Helpline',
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: IconButton(
-        //           icon: const Icon(Icons.settings),
-        //           onPressed: () {
-        //             Navigator.push(
-        //               context,
-        //               MaterialPageRoute(builder: (context) => const Settings()),
-        //             );
-        //           },
-        //         ),
-        //         label: 'Settings',
-        //       ),
-        //     ]),
-        //drawer: MyDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
           title: const Text(
-            'RResQ',
+            'ResQ',
             style: TextStyle(fontSize: 24, fontFamily: "PlayfairDisplay"),
           ),
           centerTitle: true,
