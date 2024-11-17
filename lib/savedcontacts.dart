@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SavedContacts extends StatefulWidget {
   const SavedContacts({super.key});
@@ -8,155 +9,97 @@ class SavedContacts extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<SavedContacts> {
+  // List to hold the contacts
+  List<Map<String, dynamic>> contacts = [
+    {"name": "", "phone": ""}
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey[200],
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_left_sharp, size: 50),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey[200],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_left_sharp, size: 50),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        backgroundColor: Colors.grey[300],
-        body: SingleChildScrollView(
+      ),
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   "SAVED CONTACTS",
                   style: TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "CONTACT 1 :",
-                      style: TextStyle(
-                          fontSize: 15, fontFamily: "PlayfairDisplay"),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(11),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true),
+                const SizedBox(height: 40),
+                for (int i = 0; i < contacts.length; i++) ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 20),
+                      Text(
+                        "CONTACT ${i + 1} :",
+                        style: TextStyle(
+                            fontSize: 15, fontFamily: "PlayfairDisplay"),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "CONTACT 2 :",
-                      style: TextStyle(
-                          fontSize: 15, fontFamily: "PlayfairDisplay"),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(11),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Column(
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                              hintText: "Enter Name",
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.black, width: 1.5),
+                                borderRadius: BorderRadius.circular(11),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true),
+                          onChanged: (value) {
+                            contacts[i]["name"] = value;
+                          },
                         ),
-                        fillColor: Colors.white,
-                        filled: true),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "CONTACT 3 :",
-                      style: TextStyle(
-                          fontSize: 15, fontFamily: "PlayfairDisplay"),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(11),
+                        SizedBox(height: 10),
+                        TextField(
+                          decoration: InputDecoration(
+                              hintText: "Enter Phone Number",
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.black, width: 1.5),
+                                borderRadius: BorderRadius.circular(11),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true),
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(10),
+                          ],
+                          onChanged: (value) {
+                            contacts[i]["phone"] = value;
+                          },
                         ),
-                        fillColor: Colors.white,
-                        filled: true),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 20,
+                      ],
                     ),
-                    Text(
-                      "CONTACT 4 :",
-                      style: TextStyle(
-                          fontSize: 15, fontFamily: "PlayfairDisplay"),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(11),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true),
                   ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
+                  SizedBox(height: 20),
+                ],
+                SizedBox(height: 40),
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      contacts.add({"name": "", "phone": ""});
+                    });
+                  },
                   backgroundColor: Colors.grey,
                   child: const Icon(Icons.add),
                 )

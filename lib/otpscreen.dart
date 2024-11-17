@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:e_cum_sd_app/myprofile.dart';
+import 'package:e_cum_sd_app/updateprofile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyProfile(),
+                          builder: (context) => const UpdateProfile(),
                         ));
                   } catch (e) {
                     log(e.toString());

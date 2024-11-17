@@ -1,4 +1,5 @@
 import 'package:e_cum_sd_app/loginpage.dart';
+import 'package:e_cum_sd_app/savedcontacts.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'
     show Firebase, FirebaseOptions;
@@ -23,6 +24,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: LoginPage());
+        debugShowCheckedModeBanner: false, home: SavedContacts());
   }
 }

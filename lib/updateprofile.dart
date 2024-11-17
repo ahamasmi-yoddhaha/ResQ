@@ -1,15 +1,17 @@
 import 'package:e_cum_sd_app/databaseservice.dart';
+import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/mainspage.dart';
+import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:flutter/material.dart';
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({super.key});
+class UpdateProfile extends StatefulWidget {
+  const UpdateProfile({super.key});
 
   @override
-  State<MyProfile> createState() => _MyProfileState();
+  State<UpdateProfile> createState() => _UpdateProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _UpdateProfileState extends State<UpdateProfile> {
   final _dbService = DatabaseService();
 
   final _name = TextEditingController();
@@ -29,15 +31,6 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey[200],
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_left_sharp, size: 50),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
         backgroundColor: Colors.grey[300],
         body: SingleChildScrollView(
           child: Center(
@@ -47,7 +40,7 @@ class _MyProfileState extends State<MyProfile> {
                   height: 40,
                 ),
                 const Text(
-                  "MY PROFILE",
+                  "UPDATE PROFILE",
                   style: TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
                 ),
                 const SizedBox(
@@ -67,18 +60,18 @@ class _MyProfileState extends State<MyProfile> {
                   ],
                 ),
                 Container(
-                  child: Text(
-                    _name.text,
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: _name,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.5),
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true),
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
                 ),
                 SizedBox(
                   height: 30,
@@ -97,18 +90,18 @@ class _MyProfileState extends State<MyProfile> {
                   ],
                 ),
                 Container(
-                  child: Text(
-                    _age.text,
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: _age,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.5),
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true),
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
                 ),
                 SizedBox(
                   height: 30,
@@ -127,18 +120,18 @@ class _MyProfileState extends State<MyProfile> {
                   ],
                 ),
                 Container(
-                  child: Text(
-                    _mobilenumber.text,
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: _mobilenumber,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.5),
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true),
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
                 ),
                 SizedBox(
                   height: 30,
@@ -157,18 +150,18 @@ class _MyProfileState extends State<MyProfile> {
                   ],
                 ),
                 Container(
-                  child: Text(
-                    _emailid.text,
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: _emailid,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.5),
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true),
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
                 ),
                 SizedBox(height: 40),
                 ElevatedButton(
@@ -180,6 +173,7 @@ class _MyProfileState extends State<MyProfile> {
                         emailid: _emailid.text);
                     _dbService.create(user);
                     _dbService.read(user);
+                    _dbService.update();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -206,24 +200,4 @@ class _MyProfileState extends State<MyProfile> {
       ),
     );
   }
-}
-
-class User {
-  final String name;
-  final String age;
-  final String mobilenumber;
-  final String emailid;
-
-  User(
-      {required this.name,
-      required this.age,
-      required this.mobilenumber,
-      required this.emailid});
-
-  Map<String, dynamic> toMap() => {
-        "name": name,
-        "age": age,
-        "mobilenumber": mobilenumber,
-        "emailid": emailid
-      };
 }

@@ -1,3 +1,5 @@
+import 'package:e_cum_sd_app/homepage.dart';
+import 'package:e_cum_sd_app/updateprofile.dart';
 import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:e_cum_sd_app/savedcontacts.dart';
 import 'package:e_cum_sd_app/savedlocation.dart';
@@ -40,8 +42,7 @@ class _DashboardState extends State<Dashboard> {
               ),
               Text(
                 "USERNAME",
-                style: TextStyle(
-                    fontFamily: "PlayfairDisplay", fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: "PlayfairDisplay"),
               ),
               SizedBox(
                 height: 20,
@@ -53,8 +54,8 @@ class _DashboardState extends State<Dashboard> {
                     "LOCATION ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontFamily: "PlayfairDisplay",
-                        fontWeight: FontWeight.bold),
+                      fontFamily: "PlayfairDisplay",
+                    ),
                   ),
                   Icon(Icons.location_on)
                 ],
@@ -75,8 +76,8 @@ class _DashboardState extends State<Dashboard> {
                     Text(
                       "MY PROFILE",
                       style: TextStyle(
-                          fontFamily: "PlayfairDisplay",
-                          fontWeight: FontWeight.bold),
+                        fontFamily: "PlayfairDisplay",
+                      ),
                     ),
                     Icon(Icons.border_color_rounded)
                   ],

@@ -8,7 +8,7 @@ class DatabaseService {
 
   create(User user) {
     try {
-      _db.ref("USERS").child("USER DATA").set(user.toMap());
+      _db.ref("USER1").child("USER DATA").set(user.toMap());
     } catch (e) {
       developer.log(e.toString());
     }
@@ -16,7 +16,7 @@ class DatabaseService {
 
   read(User user) async {
     try {
-      final data = await _db.ref("USERS").onValue;
+      final data = await _db.ref("USER1").onValue;
       data.listen(
         (event) {
           developer.log(event.snapshot.children.toList()[0].value.toString());
@@ -25,5 +25,11 @@ class DatabaseService {
     } catch (e) {
       developer.log(e.toString());
     }
+  }
+
+  update() async {
+    try {
+      _db.ref("USER1").child("USER DATA").update({});
+    } catch (e) {}
   }
 }
