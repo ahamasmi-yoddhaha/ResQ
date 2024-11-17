@@ -1,8 +1,6 @@
 import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:e_cum_sd_app/help.dart';
-import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/permission.dart';
-import 'package:e_cum_sd_app/savedlocation.dart';
 import 'package:e_cum_sd_app/sync.dart';
 import 'package:flutter/material.dart';
 

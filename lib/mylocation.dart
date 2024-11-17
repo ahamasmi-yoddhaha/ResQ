@@ -1,7 +1,5 @@
 import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:e_cum_sd_app/settings.dart';
-import 'package:e_cum_sd_app/homepage.dart';
 
 class MyLocation extends StatefulWidget {
   const MyLocation({super.key});

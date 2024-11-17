@@ -1,7 +1,5 @@
 import 'package:e_cum_sd_app/dashboard.dart';
-import 'package:e_cum_sd_app/mylocation.dart';
 import 'package:flutter/material.dart';
-import 'package:e_cum_sd_app/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

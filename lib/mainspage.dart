@@ -23,16 +23,28 @@ class _MainsPageState extends State<MainsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[currentIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: currentIndex,
-        onDestinationSelected: (index) {
-          setState(() => currentIndex = index);
-        },
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-          NavigationDestination(icon: Icon(Icons.call), label: "Helpline"),
-          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
-        ],
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.all(
+            const TextStyle(
+              fontFamily: 'CustomFont', // Replace with your font
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        child: NavigationBar(
+          selectedIndex: currentIndex,
+          onDestinationSelected: (index) {
+            setState(() => currentIndex = index);
+          },
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+            NavigationDestination(icon: Icon(Icons.call), label: "Helpline"),
+            NavigationDestination(
+                icon: Icon(Icons.settings), label: "Settings"),
+          ],
+        ),
       ),
     );
   }

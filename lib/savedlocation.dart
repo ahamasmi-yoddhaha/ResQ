@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:e_cum_sd_app/homepage.dart';
-import 'package:e_cum_sd_app/settings.dart';
 
 class SavedLocation extends StatefulWidget {
   const SavedLocation({super.key});
