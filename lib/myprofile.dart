@@ -1,5 +1,5 @@
 import 'package:e_cum_sd_app/databaseservice.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
@@ -179,6 +179,12 @@ class _MyProfileState extends State<MyProfile> {
                         mobilenumber: _mobilenumber.text,
                         emailid: _emailid.text);
                     _dbService.create(user);
+                    _dbService.read(user);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainsPage(),
+                        ));
                   },
                   child: Text(
                     "SAVE",

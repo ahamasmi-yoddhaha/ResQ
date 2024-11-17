@@ -13,4 +13,17 @@ class DatabaseService {
       developer.log(e.toString());
     }
   }
+
+  read(User user) async {
+    try {
+      final data = await _db.ref("USERS").onValue;
+      data.listen(
+        (event) {
+          developer.log(event.snapshot.children.toList()[0].value.toString());
+        },
+      );
+    } catch (e) {
+      developer.log(e.toString());
+    }
+  }
 }
