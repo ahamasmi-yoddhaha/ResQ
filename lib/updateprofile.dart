@@ -1,5 +1,4 @@
 import 'package:e_cum_sd_app/databaseservice.dart';
-import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +171,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         mobilenumber: _mobilenumber.text,
                         emailid: _emailid.text);
                     _dbService.create(user);
-                    _dbService.read(user);
+
                     _dbService.update();
                     Navigator.push(
                         context,

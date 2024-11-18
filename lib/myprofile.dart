@@ -1,5 +1,4 @@
 import 'package:e_cum_sd_app/databaseservice.dart';
-import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
@@ -74,7 +73,6 @@ class _MyProfileState extends State<MyProfile> {
                         TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
                   ),
                   decoration: BoxDecoration(
-                      color: Colors.white,
                       border: Border.all(color: Colors.black, width: 1.5),
                       borderRadius: BorderRadius.circular(11)),
                   width: 340,
@@ -183,11 +181,11 @@ class _MyProfileState extends State<MyProfile> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MainsPage(),
+                          builder: (context) => MyProfile(),
                         ));
                   },
                   child: Text(
-                    "SAVE",
+                    "EDIT",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "PlayfairDisplay",

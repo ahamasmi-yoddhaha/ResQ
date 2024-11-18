@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:e_cum_sd_app/mainspage.dart';
-import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:e_cum_sd_app/updateprofile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
