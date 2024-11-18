@@ -9,7 +9,11 @@ class Permission extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<Permission> {
-  bool _lights = false;
+  bool _location = false;
+  bool _notifications = false;
+  bool _sms = false;
+  bool _hotKey = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,20 +55,19 @@ class _MyWidgetState extends State<Permission> {
                     SizedBox(
                       width: 35,
                     ),
-                    Text(
-                      "LOCATION",
-                      style: TextStyle(
-                          fontSize: 25, fontFamily: "PlayfairDisplay"),
-                    ),
-                    SizedBox(
-                      width: 143,
+                    Expanded(
+                      child: Text(
+                        "LOCATION",
+                        style: TextStyle(
+                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      ),
                     ),
                     CupertinoSwitch(
-                        value: _lights,
+                        value: _location,
                         thumbColor: Colors.red,
                         onChanged: (bool value) {
                           setState(() {
-                            _lights = value;
+                            _location = value;
                           });
                         })
                   ],
@@ -78,20 +81,19 @@ class _MyWidgetState extends State<Permission> {
                     SizedBox(
                       width: 35,
                     ),
-                    Text(
-                      "NOTIFICATIONS",
-                      style: TextStyle(
-                          fontSize: 25, fontFamily: "PlayfairDisplay"),
-                    ),
-                    SizedBox(
-                      width: 80,
+                    Expanded(
+                      child: Text(
+                        "NOTIFICATIONS",
+                        style: TextStyle(
+                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      ),
                     ),
                     CupertinoSwitch(
-                        value: _lights,
+                        value: _notifications,
                         thumbColor: Colors.red,
                         onChanged: (bool value) {
                           setState(() {
-                            _lights = value;
+                            _notifications = value;
                           });
                         })
                   ],
@@ -105,20 +107,19 @@ class _MyWidgetState extends State<Permission> {
                     SizedBox(
                       width: 35,
                     ),
-                    Text(
-                      "SMS",
-                      style: TextStyle(
-                          fontSize: 25, fontFamily: "PlayfairDisplay"),
-                    ),
-                    SizedBox(
-                      width: 210,
+                    Expanded(
+                      child: Text(
+                        "SMS",
+                        style: TextStyle(
+                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      ),
                     ),
                     CupertinoSwitch(
-                        value: _lights,
+                        value: _sms,
                         thumbColor: Colors.red,
                         onChanged: (bool value) {
                           setState(() {
-                            _lights = value;
+                            _sms = value;
                           });
                         })
                   ],
@@ -132,20 +133,19 @@ class _MyWidgetState extends State<Permission> {
                     SizedBox(
                       width: 35,
                     ),
-                    Text(
-                      "HOT KEY",
-                      style: TextStyle(
-                          fontSize: 25, fontFamily: "PlayfairDisplay"),
-                    ),
-                    SizedBox(
-                      width: 160,
+                    Expanded(
+                      child: Text(
+                        "HOT KEY",
+                        style: TextStyle(
+                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      ),
                     ),
                     CupertinoSwitch(
-                        value: _lights,
+                        value: _hotKey,
                         thumbColor: Colors.red,
                         onChanged: (bool value) {
                           setState(() {
-                            _lights = value;
+                            _hotKey = value;
                           });
                         })
                   ],

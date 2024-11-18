@@ -9,8 +9,10 @@ class Sync extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<Sync> {
-  bool _lights = false;
+  bool _automaticSync = false; // Track the state of the automatic sync toggle
+  bool _manualSync = false; // Track the state of the manual sync toggle
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,11 +54,11 @@ class _MyWidgetState extends State<Sync> {
                         TextStyle(fontSize: 25, fontFamily: "PlayfairDisplay"),
                   ),
                   CupertinoSwitch(
-                      value: _lights,
+                      value: _automaticSync,
                       thumbColor: Colors.red,
                       onChanged: (bool value) {
                         setState(() {
-                          _lights = value;
+                          _automaticSync = value;
                         });
                       })
                 ],
@@ -76,11 +78,11 @@ class _MyWidgetState extends State<Sync> {
                         TextStyle(fontSize: 25, fontFamily: "PlayfairDisplay"),
                   ),
                   CupertinoSwitch(
-                      value: _lights,
+                      value: _manualSync,
                       thumbColor: Colors.red,
                       onChanged: (bool value) {
                         setState(() {
-                          _lights = value;
+                          _manualSync = value;
                         });
                       })
                 ],

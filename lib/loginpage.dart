@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                       controller: phoneController,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                           suffixIcon: Icon(Icons.phone),
                           fillColor: Colors.white,

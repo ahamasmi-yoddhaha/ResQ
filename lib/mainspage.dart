@@ -25,7 +25,7 @@ class _MainsPageState extends State<MainsPage> {
       body: pages[currentIndex],
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          labelTextStyle: MaterialStateProperty.all(
+          labelTextStyle: WidgetStateProperty.all(
             const TextStyle(
               fontFamily: 'CustomFont', // Replace with your font
               fontSize: 14,

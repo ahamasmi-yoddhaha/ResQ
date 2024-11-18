@@ -1,6 +1,7 @@
 import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:e_cum_sd_app/savedcontacts.dart';
 import 'package:e_cum_sd_app/savedlocation.dart';
+import 'package:e_cum_sd_app/updateprofile.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -65,7 +66,8 @@ class _DashboardState extends State<Dashboard> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MyProfile()),
+                    MaterialPageRoute(
+                        builder: (context) => const UpdateProfile()),
                   );
                 },
                 child: Row(
@@ -77,7 +79,7 @@ class _DashboardState extends State<Dashboard> {
                         fontFamily: "PlayfairDisplay",
                       ),
                     ),
-                    Icon(Icons.border_color_rounded)
+                    Icon(Icons.edit)
                   ],
                 ),
               ),

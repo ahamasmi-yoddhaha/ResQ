@@ -10,37 +10,42 @@ class SavedContacts extends StatefulWidget {
 }
 
 class _SavedContactsState extends State<SavedContacts> {
-  // Reference to Firebase Realtime Database
   final DatabaseReference contactsRef =
-      FirebaseDatabase.instance.ref('contacts');
+      FirebaseDatabase.instance.ref('USER1/savedcontacts');
 
   List<Map<String, dynamic>> contacts = [];
+  Map<String, TextEditingController> nameControllers = {};
+  Map<String, TextEditingController> phoneControllers = {};
 
   @override
   void initState() {
     super.initState();
-    // Listen for changes in Realtime Database
     contactsRef.onValue.listen((event) {
       final data = event.snapshot.value as Map<dynamic, dynamic>? ?? {};
       setState(() {
         contacts = data.entries.map((e) {
+          String id = e.key;
+          String name = e.value['name'] ?? '';
+          String phone = e.value['phone'] ?? '';
+
+          nameControllers[id] = TextEditingController(text: name);
+          phoneControllers[id] = TextEditingController(text: phone);
+
           return {
-            "id": e.key,
-            "name": e.value['name'] ?? '',
-            "phone": e.value['phone'] ?? '',
+            "id": id,
+            "name": name,
+            "phone": phone,
           };
         }).toList();
       });
     });
   }
 
-  // Validate phone number with country code
   bool isValidPhoneNumber(String phone) {
     final phoneRegExp = RegExp(r'^\+\d{12}$');
     return phoneRegExp.hasMatch(phone);
   }
 
-  // Custom TextInputFormatter for allowing + and numbers
   TextInputFormatter phoneNumberFormatter() {
     return FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'));
   }
@@ -82,7 +87,6 @@ class _SavedContactsState extends State<SavedContacts> {
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
-                          // Delete contact
                           contactsRef.child(contacts[i]["id"]).remove();
                         },
                       )
@@ -106,18 +110,12 @@ class _SavedContactsState extends State<SavedContacts> {
                             final id = contacts[i]["id"];
                             contactsRef.child(id).update({"name": value});
                           },
-                          controller: TextEditingController(
-                              text: contacts[i]
-                                  ["name"]) // Populate initial value
-                            ..selection = TextSelection.fromPosition(
-                              TextPosition(offset: contacts[i]["name"].length),
-                            ),
+                          controller: nameControllers[contacts[i]["id"]],
                         ),
                         const SizedBox(height: 10),
                         TextField(
                           decoration: InputDecoration(
-                              hintText:
-                                  "Enter Phone Number (+countryCodePhoneNumber)",
+                              hintText: "Enter Phone Number",
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     color: Colors.black, width: 1.5),
@@ -127,24 +125,16 @@ class _SavedContactsState extends State<SavedContacts> {
                               filled: true),
                           keyboardType: TextInputType.phone,
                           inputFormatters: [
-                            phoneNumberFormatter(), // Custom formatter
-                            LengthLimitingTextInputFormatter(
-                                13), // Allow '+' and 12 digits
+                            phoneNumberFormatter(),
+                            LengthLimitingTextInputFormatter(13),
                           ],
                           onChanged: (value) {
                             if (isValidPhoneNumber(value)) {
                               final id = contacts[i]["id"];
                               contactsRef.child(id).update({"phone": value});
-                            } else {
-                              // Optionally show an error if the phone number is invalid
                             }
                           },
-                          controller: TextEditingController(
-                              text: contacts[i]
-                                  ["phone"]) // Populate initial value
-                            ..selection = TextSelection.fromPosition(
-                              TextPosition(offset: contacts[i]["phone"].length),
-                            ),
+                          controller: phoneControllers[contacts[i]["id"]],
                         ),
                       ],
                     ),
@@ -155,7 +145,6 @@ class _SavedContactsState extends State<SavedContacts> {
                 FloatingActionButton(
                   onPressed: () {
                     final newContact = {"name": "", "phone": ""};
-                    // Use a custom ID for each contact
                     final newId = "contact${contacts.length + 1}";
                     final newRef = contactsRef.child(newId);
                     newRef.set(newContact);

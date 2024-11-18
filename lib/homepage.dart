@@ -1,7 +1,7 @@
+import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:telephony/telephony.dart'; // Import telephony for sending SMS
-import 'package:firebase_database/firebase_database.dart'; // Firebase for Realtime Database
-import 'package:e_cum_sd_app/savedcontacts.dart'; // Import SavedContacts page
+import 'package:telephony/telephony.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,16 +10,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Telephony telephony =
-      Telephony.instance; // Instance of Telephony to send SMS
+  final Telephony telephony = Telephony.instance;
   final DatabaseReference contactsRef =
-      FirebaseDatabase.instance.ref('contacts');
+      FirebaseDatabase.instance.ref('USER1/savedcontacts');
   List<Map<String, dynamic>> contacts = [];
 
   @override
   void initState() {
     super.initState();
-    // Listen for changes in Realtime Database for saved contacts
     contactsRef.onValue.listen((event) {
       final data = event.snapshot.value as Map<dynamic, dynamic>? ?? {};
       setState(() {
@@ -34,19 +32,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // Request SMS permissions at runtime
   void requestSmsPermission() async {
     bool? permissionsGranted = await telephony.requestSmsPermissions;
-    if (!permissionsGranted!) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("SMS permissions not granted!")),
-      );
+    if (permissionsGranted == true) {
+      _showConfirmationDialog();
     } else {
-      _showConfirmationDialog(); // Show confirmation dialog only if permissions granted
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("SMS permissions denied.")),
+      );
     }
   }
 
-  // Show a dialog to confirm if the user really wants to send an emergency message
   void _showConfirmationDialog() {
     showDialog(
       context: context,
@@ -58,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                       content: Text("Your request has been cancelled")),
@@ -68,8 +64,8 @@ class _HomePageState extends State<HomePage> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-                sendEmergencyMessages(); // Send the emergency message if confirmed
+                Navigator.of(context).pop();
+                sendEmergencyMessages();
               },
               child: const Text('Yes'),
             ),
@@ -79,17 +75,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Send Emergency SMS to all contacts
-// Send Emergency SMS to all contacts
   void sendEmergencyMessages() async {
-    // Get the saved contacts from Firebase or your local data
     for (var contact in contacts) {
       String phone = contact['phone'];
-
-      // Check if the phone number is in the correct format (including the + sign)
       if (phone.isNotEmpty && phone.startsWith('+') && phone.length == 13) {
         try {
-          // Send the emergency message (Assuming telephony.sendSms() is the function to use)
           await telephony.sendSms(
             to: phone,
             message: "Help! I am in an emergency, please assist.",
@@ -105,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Invalid phone number format")),
+          SnackBar(content: Text("Invalid phone number: $phone")),
         );
       }
     }
@@ -128,16 +118,16 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SavedContacts()),
+                MaterialPageRoute(builder: (context) => const Dashboard()),
               );
             },
           ),
         ),
         body: Column(
           children: [
+            const SizedBox(height: 15),
             GestureDetector(
-              onTap:
-                  requestSmsPermission, // Request permission when tapping the button
+              onTap: requestSmsPermission,
               child: Container(
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(16.0),

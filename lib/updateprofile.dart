@@ -1,6 +1,7 @@
 import 'package:e_cum_sd_app/databaseservice.dart';
+import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/mainspage.dart';
-import 'package:e_cum_sd_app/myprofile.dart';
+import 'package:e_cum_sd_app/user.dart';
 import 'package:flutter/material.dart';
 
 class UpdateProfile extends StatefulWidget {
@@ -17,27 +18,55 @@ class _UpdateProfileState extends State<UpdateProfile> {
   final _age = TextEditingController();
   final _mobilenumber = TextEditingController();
   final _emailid = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData(); // Load existing user data when the page is loaded
+  }
+
+  // Load existing user data from the database
+  Future<void> _loadUserData() async {
+    final user = await _dbService.getUser(); // Fetch the user data from DB
+
+    if (user != null) {
+      // Populate the fields with the data from the database
+      _name.text = user.name;
+      _age.text = user.age;
+      _mobilenumber.text = user.mobilenumber;
+      _emailid.text = user.emailid;
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
-
     _name.dispose();
     _age.dispose();
     _mobilenumber.dispose();
     _emailid.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.grey[200],
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_left_sharp, size: 50),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         backgroundColor: Colors.grey[300],
         body: SingleChildScrollView(
-          child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 40),
                 const Text(
                   "UPDATE PROFILE",
                   style: TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
@@ -58,20 +87,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
+                TextField(
                     controller: _name,
                     decoration: InputDecoration(
+                        hintText: "Enter Name",
+                        fillColor: Colors.white,
+                        filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1.5),
                           borderRadius: BorderRadius.circular(11),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true),
-                  ),
-                ),
+                        ))),
                 SizedBox(
                   height: 30,
                 ),
@@ -88,20 +114,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
+                TextField(
                     controller: _age,
                     decoration: InputDecoration(
+                        hintText: "Enter Age",
+                        fillColor: Colors.white,
+                        filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1.5),
                           borderRadius: BorderRadius.circular(11),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true),
-                  ),
-                ),
+                        ))),
                 SizedBox(
                   height: 30,
                 ),
@@ -118,20 +141,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
+                TextField(
                     controller: _mobilenumber,
                     decoration: InputDecoration(
+                        hintText: "Enter Phone Number",
+                        fillColor: Colors.white,
+                        filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1.5),
                           borderRadius: BorderRadius.circular(11),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true),
-                  ),
-                ),
+                        ))),
                 SizedBox(
                   height: 30,
                 ),
@@ -142,27 +162,25 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       width: 20,
                     ),
                     Text(
-                      "Email Id",
+                      "Email id",
                       style: TextStyle(
                           fontSize: 15, fontFamily: "PlayfairDisplay"),
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
+                TextField(
                     controller: _emailid,
                     decoration: InputDecoration(
+                        hintText: "Enter email id",
+                        fillColor: Colors.white,
+                        filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1.5),
                           borderRadius: BorderRadius.circular(11),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true),
-                  ),
-                ),
+                        ))),
                 SizedBox(height: 40),
+                // Save button
                 ElevatedButton(
                   onPressed: () {
                     final user = User(
@@ -170,28 +188,26 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         age: _age.text,
                         mobilenumber: _mobilenumber.text,
                         emailid: _emailid.text);
-                    _dbService.create(user);
-
-                    _dbService.update();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MainsPage(),
-                        ));
+                    _dbService.createOrUpdateUser(user); // Save the data
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MainsPage()));
                   },
                   child: Text(
                     "SAVE",
                     style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "PlayfairDisplay",
-                        fontSize: 20),
+                      color: Colors.black,
+                      fontFamily: "PlayfairDisplay",
+                      fontSize: 20,
+                    ),
                   ),
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(150, 50),
-                      backgroundColor: Colors.grey[400],
-                      shape: ContinuousRectangleBorder(
-                          borderRadius: BorderRadius.circular(9))),
-                )
+                    fixedSize: Size(150, 50),
+                    backgroundColor: Colors.grey[400],
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(9),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
