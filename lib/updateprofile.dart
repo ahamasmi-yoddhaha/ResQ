@@ -1,3 +1,4 @@
+import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:e_cum_sd_app/databaseservice.dart';
 import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/mainspage.dart';
@@ -190,7 +191,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         emailid: _emailid.text);
                     _dbService.createOrUpdateUser(user); // Save the data
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MainsPage()));
+                        MaterialPageRoute(builder: (context) => Dashboard()));
                   },
                   child: Text(
                     "SAVE",
