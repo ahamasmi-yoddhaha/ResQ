@@ -1,3 +1,4 @@
+import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/loginpage.dart';
 import 'package:e_cum_sd_app/mainspage.dart';
@@ -26,6 +27,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: LoginPage());
+        debugShowCheckedModeBanner: false, home: MainsPage());
   }
 }

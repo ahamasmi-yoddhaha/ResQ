@@ -1,8 +1,8 @@
-
+import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:e_cum_sd_app/savedcontacts.dart';
 import 'package:e_cum_sd_app/savedlocation.dart';
-import 'package:e_cum_sd_app/updateprofile.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -15,167 +15,157 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[300],
-        appBar: AppBar(
-          backgroundColor: Colors.grey[200],
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_left_sharp, size: 50),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Icon(
-                Icons.account_circle_rounded,
-                size: 100,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "USERNAME",
-                style: TextStyle(fontFamily: "PlayfairDisplay"),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "LOCATION ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: "PlayfairDisplay",
-                    ),
-                  ),
-                  Icon(Icons.location_on)
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const UpdateProfile()),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+      child: FractionallySizedBox(
+        widthFactor:
+            1.0, // Ensure the content stays within the three-fourths view
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "MY PROFILE",
-                      style: TextStyle(
-                        fontFamily: "PlayfairDisplay",
+                    // Profile Avatar
+                    Center(
+                      child: CircleAvatar(
+                        radius: 40, // Adjusted size for visibility
+                        backgroundColor: Colors.grey[100],
+                        child: Icon(
+                          Icons.account_circle_rounded,
+                          size: 70,
+                          color: Colors.grey[600],
+                        ),
                       ),
                     ),
-                    Icon(Icons.edit)
+                    const SizedBox(height: 12),
+                    // Title
+                    Text(
+                      "    Welcome, Kavya!",
+                      style: GoogleFonts.playball(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+
+                    // Profile Section
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyProfile()),
+                        );
+                      },
+                      child: ListTile(
+                        leading: const Icon(Icons.person, color: Colors.black),
+                        title: Text(
+                          "     My Profile",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  fontSize: 18, // Adjusted font size
+                                  fontFamily: "PlayfairDisplay",
+                                  fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+
+                    // Saved Contacts
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SavedContacts()),
+                        );
+                      },
+                      child: ListTile(
+                        leading:
+                            const Icon(Icons.contacts, color: Colors.black),
+                        title: Text(
+                          "     Saved Contacts",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontSize: 18,
+                                    fontFamily: "PlayfairDisplay",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+
+                    // Saved Locations
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SavedLocation()),
+                        );
+                      },
+                      child: ListTile(
+                        leading:
+                            const Icon(Icons.location_on, color: Colors.black),
+                        title: Text(
+                          "     Saved Locations",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontSize: 18,
+                                    fontFamily: "PlayfairDisplay",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+
+                    // Rate/Review Us
+                    GestureDetector(
+                      onTap: () {},
+                      child: ListTile(
+                        leading: const Icon(Icons.star, color: Colors.black),
+                        title: Text(
+                          "     Rate/Review Us",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontSize: 18,
+                                    fontFamily: "PlayfairDisplay",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    SizedBox(
+                      height: 190,
+                    ),
+
+                    // Logout
+                    GestureDetector(
+                      onTap: () {},
+                      child: ListTile(
+                        leading: const Icon(Icons.logout, color: Colors.red),
+                        title: Text(
+                          "     Logout",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontSize: 18,
+                                    fontFamily: "PlayfairDisplay",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                  ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SavedContacts()),
-                  );
-                },
-                child: Container(
-                  child: Text(
-                    "SAVED CONTACTS",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SavedLocation()),
-                  );
-                },
-                child: Container(
-                  child: Text(
-                    "SAVED LOCATIONS",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  child: Text(
-                    "RATE/REVIEW US",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  child: Text(
-                    "LOGOUT",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(11)),
-                  width: 340,
-                  height: 55.0,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

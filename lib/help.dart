@@ -14,7 +14,7 @@ class _MyWidgetState extends State<Help> {
       child: Scaffold(
         backgroundColor: Colors.grey[300],
         appBar: AppBar(
-          backgroundColor: Colors.grey[200],
+          backgroundColor: Colors.grey[300],
           leading: IconButton(
             icon: const Icon(Icons.arrow_left_sharp, size: 50),
             onPressed: () {

@@ -2,17 +2,42 @@ import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:telephony/telephony.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final Telephony telephony = Telephony.instance;
+  final List<String> phoneNumbers = [
+    "102",
+    "100",
+    "108",
+    "1070",
+    "040 - 23202113",
+    "101",
+    "1098",
+    "1077",
+    "1091"
+  ];
+  final List<String> helplines = [
+    'Ambulance',
+    'Police Control Room',
+    'Accident Helpline',
+    'State Control Room',
+    'Collectorate',
+    'Fire and rescue',
+    'Child helpline',
+    'Disaster Helpline',
+    'Sexual Harrasment',
+  ];
   final DatabaseReference contactsRef =
-      FirebaseDatabase.instance.ref('USER1/savedcontacts');
+      FirebaseDatabase.instance.ref('USERS/USER1/savedcontacts');
   List<Map<String, dynamic>> contacts = [];
 
   @override
@@ -30,6 +55,15 @@ class _HomePageState extends State<HomePage> {
         }).toList();
       });
     });
+  }
+
+  Future<void> _makeCall(String phoneNumber) async {
+    final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunch(phoneUri.toString())) {
+      await launch(phoneUri.toString());
+    } else {
+      throw 'Could not launch $phoneNumber';
+    }
   }
 
   void requestSmsPermission() async {
@@ -76,6 +110,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   void sendEmergencyMessages() async {
+    // Ensure contacts are loaded before sending messages
+    if (contacts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("No contacts found")),
+      );
+      return;
+    }
+
     for (var contact in contacts) {
       String phone = contact['phone'];
       if (phone.isNotEmpty && phone.startsWith('+') && phone.length == 13) {
@@ -101,13 +143,54 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _openDashboard() {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: "Dismiss",
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return SafeArea(
+          child: Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  color: Colors.black.withOpacity(0.4),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                          begin: const Offset(-1.0, 0.0),
+                          end: Offset(-0.07, 0.0))
+                      .animate(animation),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    child: const Material(
+                      color: Colors.white,
+                      child: Dashboard(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 300),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[300],
         appBar: AppBar(
-          backgroundColor: Colors.grey[200],
+          backgroundColor: Colors.grey[100],
           title: const Text(
             'ResQ',
             style: TextStyle(fontSize: 24, fontFamily: "PlayfairDisplay"),
@@ -115,12 +198,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.dehaze_rounded),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
-              );
-            },
+            onPressed: _openDashboard,
           ),
         ),
         body: Column(
@@ -132,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(16.0),
                 width: 400,
-                height: 150,
+                height: 170,
                 decoration: BoxDecoration(
                   color: Colors.red.shade900,
                   borderRadius: BorderRadius.circular(15.0),
@@ -153,6 +231,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             SizedBox(
               height: 10,
             ),
@@ -160,43 +239,64 @@ class _HomePageState extends State<HomePage> {
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               padding: const EdgeInsets.all(16.0),
               width: double.infinity,
-              height: 380,
+              height: 400,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15.0),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 3.0,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'COMMON HELPLINE NUMBERS',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: "PlayfairDisplay",
-                        color: Colors.black,
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold,
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'COMMON HELPLINE NUMBERS',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "PlayfairDisplay",
+                      color: Colors.black,
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 4),
-                    const Divider(color: Colors.black),
-                    const SizedBox(height: 20),
-                    for (int i = 1; i <= 15; i++)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          'Helpline $i: +123456789',
-                          style: const TextStyle(
-                              fontSize: 20, fontFamily: "PlayfairDisplay"),
-                        ),
-                      ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 4),
+                  const Divider(color: Colors.black),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: phoneNumbers.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            _makeCall(phoneNumbers[index]);
+                          },
+                          child: ListTile(
+                            title: Row(
+                              children: [
+                                Text(
+                                  helplines[index],
+                                  style: GoogleFonts.raleway(),
+                                ),
+                                Text(" : "),
+                                Text(
+                                  phoneNumbers[index],
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.blue),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

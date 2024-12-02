@@ -2,7 +2,6 @@ import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:e_cum_sd_app/databaseservice.dart';
 import 'package:e_cum_sd_app/homepage.dart';
 import 'package:e_cum_sd_app/mainspage.dart';
-import 'package:e_cum_sd_app/user.dart';
 import 'package:flutter/material.dart';
 
 class UpdateProfile extends StatefulWidget {
@@ -52,15 +51,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey[200],
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_left_sharp, size: 50),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
         backgroundColor: Colors.grey[300],
         body: SingleChildScrollView(
           child: Padding(
@@ -191,7 +181,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         emailid: _emailid.text);
                     _dbService.createOrUpdateUser(user); // Save the data
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Dashboard()));
+                        MaterialPageRoute(builder: (context) => MainsPage()));
                   },
                   child: Text(
                     "SAVE",

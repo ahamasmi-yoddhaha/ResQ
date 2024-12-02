@@ -1,3 +1,4 @@
+import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -11,7 +12,7 @@ class SavedContacts extends StatefulWidget {
 
 class _SavedContactsState extends State<SavedContacts> {
   final DatabaseReference contactsRef =
-      FirebaseDatabase.instance.ref('USER1/savedcontacts');
+      FirebaseDatabase.instance.ref('USERS/USER1/savedcontacts');
 
   List<Map<String, dynamic>> contacts = [];
   Map<String, TextEditingController> nameControllers = {};
@@ -28,8 +29,15 @@ class _SavedContactsState extends State<SavedContacts> {
           String name = e.value['name'] ?? '';
           String phone = e.value['phone'] ?? '';
 
-          nameControllers[id] = TextEditingController(text: name);
-          phoneControllers[id] = TextEditingController(text: phone);
+          // Only create controllers once for each contact
+          if (!nameControllers.containsKey(id)) {
+            nameControllers[id] = TextEditingController(text: name);
+            phoneControllers[id] = TextEditingController(text: phone);
+          } else {
+            nameControllers[id]?.text =
+                name; // Update controller text without resetting
+            phoneControllers[id]?.text = phone;
+          }
 
           return {
             "id": id,
@@ -58,7 +66,10 @@ class _SavedContactsState extends State<SavedContacts> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_left_sharp, size: 50),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MainsPage()),
+            );
           },
         ),
       ),
@@ -89,13 +100,14 @@ class _SavedContactsState extends State<SavedContacts> {
                         onPressed: () {
                           contactsRef.child(contacts[i]["id"]).remove();
                         },
-                      )
+                      ),
                     ],
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Column(
                       children: [
+                        // Name TextField
                         TextField(
                           decoration: InputDecoration(
                               hintText: "Enter Name",
@@ -106,13 +118,15 @@ class _SavedContactsState extends State<SavedContacts> {
                               ),
                               fillColor: Colors.white,
                               filled: true),
+                          controller: nameControllers[contacts[i]["id"]],
                           onChanged: (value) {
                             final id = contacts[i]["id"];
+                            // Only update Firebase when the name changes
                             contactsRef.child(id).update({"name": value});
                           },
-                          controller: nameControllers[contacts[i]["id"]],
                         ),
                         const SizedBox(height: 10),
+                        // Phone TextField
                         TextField(
                           decoration: InputDecoration(
                               hintText: "Enter Phone Number",
@@ -128,13 +142,14 @@ class _SavedContactsState extends State<SavedContacts> {
                             phoneNumberFormatter(),
                             LengthLimitingTextInputFormatter(13),
                           ],
+                          controller: phoneControllers[contacts[i]["id"]],
                           onChanged: (value) {
                             if (isValidPhoneNumber(value)) {
                               final id = contacts[i]["id"];
+                              // Only update Firebase when the phone number changes
                               contactsRef.child(id).update({"phone": value});
                             }
                           },
-                          controller: phoneControllers[contacts[i]["id"]],
                         ),
                       ],
                     ),
@@ -151,7 +166,7 @@ class _SavedContactsState extends State<SavedContacts> {
                   },
                   backgroundColor: Colors.grey,
                   child: const Icon(Icons.add),
-                )
+                ),
               ],
             ),
           ),

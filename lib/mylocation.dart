@@ -1,204 +1,211 @@
-import 'package:e_cum_sd_app/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:e_cum_sd_app/dashboard.dart';
 
 class MyLocation extends StatefulWidget {
   const MyLocation({super.key});
 
   @override
-  State<MyLocation> createState() => _MyWidgetState();
+  State<MyLocation> createState() => _MyLocationState();
 }
 
-class _MyWidgetState extends State<MyLocation> {
-  int currentIndex = 0;
-  @override
-  Widget build(BuildContext ccontext) {
-    var container = Container(
-      width: 300,
-      height: 150,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        borderRadius: BorderRadius.circular(11),
-        color: Colors.white,
-      ),
-      margin: EdgeInsets.all(5),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
+class _MyLocationState extends State<MyLocation> {
+  void _openDashboard() {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: "Dismiss",
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return SafeArea(
+          child: Stack(
             children: [
-              Icon(
-                Icons.local_hospital,
-                size: 40,
-                color: Colors.red,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  color: Colors.black.withOpacity(0.4),
+                ),
               ),
-              SizedBox(
-                width: 20,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(-1.0, 0.0),
+                    end: Offset(-0.07, 0.0), // 3/4th of the screen
+                  ).animate(animation),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    child: const Material(
+                      color: Colors.white,
+                      child: Dashboard(),
+                    ),
+                  ),
+                ),
               ),
-              Center(
-                child: Text(
-                  'HOSPITAL',
-                  style: TextStyle(
+            ],
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 300),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[300],
+        appBar: AppBar(
+          title: const Text(
+            'ResQ',
+            style: TextStyle(fontSize: 24, fontFamily: "PlayfairDisplay"),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.grey[200],
+          leading: IconButton(
+            icon: const Icon(Icons.dehaze_rounded),
+            onPressed: _openDashboard,
+          ),
+        ),
+        body: Column(
+          children: [
+            // "MyLocation" text that stays static
+            const SizedBox(height: 20),
+            const Text(
+              'My Location',
+              style: TextStyle(
+                fontFamily: "PlayfairDisplay",
+                fontSize: 28,
+              ),
+            ),
+            const SizedBox(height: 20),
+            // SingleChildScrollView for the rest of the content
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          width: 360, // Increased width of the container
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Sections: Hospital, Police, Fire Station
+                              _buildSection(
+                                title: 'HOSPITAL',
+                                icon: Icons.local_hospital,
+                                iconColor: Colors.red,
+                                subtitle: 'City Hospital',
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              const Divider(
+                                  color: Colors.black38, thickness: 1.0),
+                              _buildSection(
+                                title: 'POLICE',
+                                icon: Icons.local_police_outlined,
+                                iconColor: const Color(0xff0f2750),
+                                subtitle: 'Local Police',
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              const Divider(
+                                  color: Colors.black38, thickness: 1.0),
+                              _buildSection(
+                                title: 'FIRE STATION',
+                                icon: Icons.fire_truck,
+                                iconColor: const Color(0xffde1738),
+                                subtitle: 'Fire Service',
+                              ),
+                              const SizedBox(height: 30),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSection({
+    required String title,
+    required IconData icon,
+    required Color iconColor,
+    required String subtitle,
+  }) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(icon, size: 40, color: iconColor),
+                const SizedBox(width: 20),
+                Text(
+                  title,
+                  style: const TextStyle(
                     fontFamily: "PlayfairDisplay",
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'City Hospital',
-            style: TextStyle(
-              fontFamily: "PlayfairDisplay",
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+              ],
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.call, color: Colors.black),
-                label: Text('Call',
-                    style: TextStyle(
-                        color: Colors.black, fontFamily: "PlayfairDisplay")),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.location_on,
-                  color: Colors.black,
-                ),
-                label: Text(
-                  'Location',
-                  style: TextStyle(
-                      color: Colors.black, fontFamily: "PlayfairDisplay"),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[300],
-        appBar: AppBar(
-          backgroundColor: Colors.grey[200],
-          leading: IconButton(
-            icon: const Icon(Icons.dehaze_rounded),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
-              );
-            },
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
+            Row(
               children: [
-                const SizedBox(
-                  height: 20,
+                IconButton(
+                  onPressed: () {
+                    // Call functionality
+                  },
+                  icon: const Icon(Icons.call, color: Color(0xff23a93f)),
+                  tooltip: 'Call',
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "MY LOCATION",
-                  style: TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                container,
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  width: 300,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(11),
-                    color: Colors.white,
-                  ),
-                  margin: EdgeInsets.all(5),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.local_police_outlined,
-                            size: 40,
-                            color: Color(0xff0f2750),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'POLICE',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "PlayfairDisplay"),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Local Police',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "PlayfairDisplay"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.call, color: Colors.black),
-                            label: Text('Call',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: "PlayfairDisplay")),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.location_on, color: Colors.black),
-                            label: Text('Location',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: "PlayfairDisplay")),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
+                IconButton(
+                  onPressed: () {
+                    // Location functionality
+                  },
+                  icon: const Icon(Icons.location_on, color: Color(0xff4870b5)),
+                  tooltip: 'Location',
                 ),
               ],
             ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Text(
+          subtitle,
+          style: const TextStyle(
+            fontFamily: "PlayfairDisplay",
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
-      ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 }

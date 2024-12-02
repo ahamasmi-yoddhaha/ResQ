@@ -60,7 +60,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MainsPage(),
+                          builder: (context) => const UpdateProfile(),
                         ));
                   } catch (e) {
                     log(e.toString());

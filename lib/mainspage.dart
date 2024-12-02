@@ -27,13 +27,15 @@ class _MainsPageState extends State<MainsPage> {
         data: NavigationBarThemeData(
           labelTextStyle: WidgetStateProperty.all(
             const TextStyle(
-              fontFamily: 'CustomFont', // Replace with your font
+              fontFamily: 'PlayfairDisplay', // Replace with your font
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         child: NavigationBar(
+          backgroundColor: Colors.grey[100],
+          indicatorColor: Colors.white,
           selectedIndex: currentIndex,
           onDestinationSelected: (index) {
             setState(() => currentIndex = index);
