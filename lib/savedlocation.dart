@@ -69,7 +69,9 @@ class _MyWidgetState extends State<SavedLocation> {
                 const SizedBox(height: 40),
                 // Floating Action Button for adding new location
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    buildLocationTile("ADD ON x", "Address");
+                  },
                   backgroundColor: Colors.grey[400],
                   child: const Icon(Icons.add, color: Colors.black),
                 ),

@@ -1,3 +1,4 @@
+import 'package:e_cum_sd_app/locations.dart';
 import 'package:e_cum_sd_app/myprofile.dart';
 import 'package:e_cum_sd_app/savedcontacts.dart';
 import 'package:e_cum_sd_app/savedlocation.dart';
@@ -105,7 +106,7 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SavedLocation()),
+                              builder: (context) => const Locations()),
                         );
                       },
                       child: ListTile(

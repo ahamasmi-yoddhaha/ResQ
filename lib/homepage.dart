@@ -202,8 +202,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(height: 15),
             GestureDetector(
               onTap: requestSmsPermission,
               child: Container(
@@ -231,15 +231,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 10,
-            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               padding: const EdgeInsets.all(16.0),
               width: double.infinity,
-              height: 400,
+              height: 360,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -299,6 +295,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 40,
+            )
           ],
         ),
       ),

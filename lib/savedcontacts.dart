@@ -2,6 +2,7 @@ import 'package:e_cum_sd_app/mainspage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SavedContacts extends StatefulWidget {
   const SavedContacts({super.key});
@@ -157,15 +158,33 @@ class _SavedContactsState extends State<SavedContacts> {
                   const SizedBox(height: 20),
                 ],
                 const SizedBox(height: 40),
-                FloatingActionButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     final newContact = {"name": "", "phone": ""};
                     final newId = "contact${contacts.length + 1}";
                     final newRef = contactsRef.child(newId);
                     newRef.set(newContact);
                   },
-                  backgroundColor: Colors.grey,
-                  child: const Icon(Icons.add),
+                  child: Center(
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          "ADD A CONTACT",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.playfair(
+                            color: Colors.black,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
