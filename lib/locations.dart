@@ -62,9 +62,9 @@ class _LocationsState extends State<Locations> {
                     Container(
                       width: MediaQuery.of(context).size.width *
                           0.8, // 90% of screen width
-                      height: 100, // Adjust height
+                      height: 110, // Adjust height
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+                          horizontal: 10, vertical: 10),
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10), // Side margin
                       decoration: BoxDecoration(
@@ -103,7 +103,7 @@ class _LocationsState extends State<Locations> {
                               const SizedBox(width: 8.0),
                               Text(
                                 address,
-                                style: GoogleFonts.raleway(fontSize: 15),
+                                style: GoogleFonts.raleway(fontSize: 17),
                               ),
                             ],
                           ),

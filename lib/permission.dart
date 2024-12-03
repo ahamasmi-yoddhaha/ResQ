@@ -30,127 +30,130 @@ class _MyWidgetState extends State<Permission> {
         ),
         body: SingleChildScrollView(
           child: Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: const Text(
-                    "PERMISSION ACCESS",
-                    style:
-                        TextStyle(fontSize: 30, fontFamily: "PlayfairDisplay"),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                SizedBox(
-                  height: 80,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 35,
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: const Text(
+                      "PERMISSION ACCESS",
+                      style: TextStyle(
+                          fontSize: 30, fontFamily: "PlayfairDisplay"),
                     ),
-                    Expanded(
-                      child: Text(
-                        "LOCATION",
-                        style: TextStyle(
-                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 35,
                       ),
-                    ),
-                    CupertinoSwitch(
-                        value: _location,
-                        thumbColor: Colors.red,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _location = value;
-                          });
-                        })
-                  ],
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 35,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "NOTIFICATIONS",
-                        style: TextStyle(
-                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      Expanded(
+                        child: Text(
+                          "LOCATION",
+                          style: TextStyle(
+                              fontSize: 25, fontFamily: "PlayfairDisplay"),
+                        ),
                       ),
-                    ),
-                    CupertinoSwitch(
-                        value: _notifications,
-                        thumbColor: Colors.red,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _notifications = value;
-                          });
-                        })
-                  ],
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 35,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "SMS",
-                        style: TextStyle(
-                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      CupertinoSwitch(
+                          value: _location,
+                          thumbColor: Colors.red,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _location = value;
+                            });
+                          })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 35,
                       ),
-                    ),
-                    CupertinoSwitch(
-                        value: _sms,
-                        thumbColor: Colors.red,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _sms = value;
-                          });
-                        })
-                  ],
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 35,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "HOT KEY",
-                        style: TextStyle(
-                            fontSize: 25, fontFamily: "PlayfairDisplay"),
+                      Expanded(
+                        child: Text(
+                          "NOTIFICATIONS",
+                          style: TextStyle(
+                              fontSize: 25, fontFamily: "PlayfairDisplay"),
+                        ),
                       ),
-                    ),
-                    CupertinoSwitch(
-                        value: _hotKey,
-                        thumbColor: Colors.red,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _hotKey = value;
-                          });
-                        })
-                  ],
-                )
-              ],
+                      CupertinoSwitch(
+                          value: _notifications,
+                          thumbColor: Colors.red,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _notifications = value;
+                            });
+                          })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 35,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "SMS",
+                          style: TextStyle(
+                              fontSize: 25, fontFamily: "PlayfairDisplay"),
+                        ),
+                      ),
+                      CupertinoSwitch(
+                          value: _sms,
+                          thumbColor: Colors.red,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _sms = value;
+                            });
+                          })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 35,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "HOT KEY",
+                          style: TextStyle(
+                              fontSize: 25, fontFamily: "PlayfairDisplay"),
+                        ),
+                      ),
+                      CupertinoSwitch(
+                          value: _hotKey,
+                          thumbColor: Colors.red,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _hotKey = value;
+                            });
+                          })
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

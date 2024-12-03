@@ -204,6 +204,9 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(
+              height: 10,
+            ),
             GestureDetector(
               onTap: requestSmsPermission,
               child: Container(

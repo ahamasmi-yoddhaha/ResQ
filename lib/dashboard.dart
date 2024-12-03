@@ -33,19 +33,22 @@ class _DashboardState extends State<Dashboard> {
                       child: CircleAvatar(
                         radius: 40, // Adjusted size for visibility
                         backgroundColor: Colors.grey[100],
-                        child: Icon(
-                          Icons.account_circle_rounded,
-                          size: 70,
-                          color: Colors.grey[600],
+                        child: ClipOval(
+                          child: Image.asset(
+                            'images/profile.jpg',
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 12),
                     // Title
                     Text(
-                      "    Welcome, Kavya!",
+                      "    Welcome, Kavya Keerti!",
                       style: GoogleFonts.playball(
-                        fontSize: 25,
+                        fontSize: 23,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
